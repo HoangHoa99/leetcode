@@ -1,4 +1,4 @@
-class MultiflyString {
+class MultiplyString {
 
     private static boolean leadingZero(String num) {
         int length = num.length();
@@ -14,26 +14,26 @@ class MultiflyString {
         for (int i = 0; i < num.length(); i++) {
             char c = num.charAt(i);
             if(!isDigit(c)) {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     private static boolean isValidLength(String num) {
         int length = num.length();
-        return length >= 1 && length <= 200;
+        return length < 1 || length > 200;
     }
 
-    private static String plusStepByStep(String numList[], int index) {
+    private static String plusStepByStep(String[] numList, int index) {
         int res = 0;
         int numListLength = numList.length;
         for(int i = 0; i < numListLength; i++) {
             String num = numList[i];
             try {
                 char value = num.charAt(index - numListLength + i);
-                int valueAsInt = Integer.valueOf(String.valueOf(value));
+                int valueAsInt = Integer.parseInt(String.valueOf(value));
                 res += valueAsInt;
             }
             catch (Exception e) {
@@ -43,7 +43,7 @@ class MultiflyString {
         return String.valueOf(res);
     }
 
-    private static String addStringInList(String numList[], int lastResLength) {
+    private static String addStringInList(String[] numList, int lastResLength) {
 
         StringBuilder result = new StringBuilder();
 
@@ -51,7 +51,7 @@ class MultiflyString {
 
         for(int i = lastResLength - 1; i > 0; i--) {
             String res = plusStepByStep(numList, i);
-            long resAsLong = Long.valueOf(res);
+            long resAsLong = Long.parseLong(res);
             resAsLong += temp;
 
             if(resAsLong > 10) {
@@ -69,10 +69,10 @@ class MultiflyString {
 
     private static String multiplyString(String num1, String num2) {
         int index = 0;
-        long number1 = Long.valueOf(num1);
-        long number2 = Long.valueOf(num2);
+        long number1 = Long.parseLong(num1);
+        long number2 = Long.parseLong(num2);
 
-        String multiResList[] = new String[num2.length()];
+        String[] multiResList = new String[num2.length()];
         while(number2 > 0) {
 
             long temp = (long) Math.pow(10, index);
@@ -90,11 +90,11 @@ class MultiflyString {
 
     public static String multiply(String num1, String num2) {
 
-        if(!isValidLength(num1) || !isValidLength(num2)) {
+        if(isValidLength(num1) || isValidLength(num2)) {
             return "0";
         }
 
-        if(!isNumberString(num1) || !isNumberString(num2)) {
+        if(isNumberString(num1) || isNumberString(num2)) {
             return "0";
         }
 

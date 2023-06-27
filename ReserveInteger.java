@@ -2,15 +2,15 @@ class ReserveInteger {
     
     private static int reverseNum(int x) {
         
-        String res = "";
+        StringBuilder res = new StringBuilder();
         
         while(x > 0) {
-            int temp = x%10;
-            x = x/10;
-            res += String.valueOf(temp);
+            int temp = x % 10;
+            x = x / 10;
+            res.append(temp);
         }
         try {
-            return Integer.valueOf(res); 
+            return Integer.parseInt(res.toString());
         }
         catch (Exception e) {
             return 0;
@@ -22,7 +22,7 @@ class ReserveInteger {
         
         int res = reverseNum(x);
         
-        return 0 - res;
+        return -res;
     }
     
     public static int reverse(int x) {

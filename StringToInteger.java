@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 class StringToInteger {
 
     private static boolean isDigit(char c) {
@@ -29,7 +31,7 @@ class StringToInteger {
 
     private static int formatRes(String res) {
 
-        if(res == "") {
+        if(Objects.equals(res, "")) {
             return 0;
         }
 
@@ -59,7 +61,7 @@ class StringToInteger {
         try{
 
             if(isDigit(first)) {
-                return Integer.valueOf(res);
+                return Integer.parseInt(res);
             }
 
             char second = res.charAt(1);
@@ -73,7 +75,7 @@ class StringToInteger {
                 res = res.substring(0, nextPunc);
             }
 
-            return Integer.valueOf(res);
+            return Integer.parseInt(res);
         }
         catch(Exception e) {
             if(isNegativePunc(first)) {
@@ -84,7 +86,7 @@ class StringToInteger {
     }
 
     public static int myAtoi(String s) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         s = s.trim();
 
         if(s.equals("")) {
@@ -103,11 +105,11 @@ class StringToInteger {
             }
 
             if(isPunc(value) || isDigit(value)) {
-                res += String.valueOf(value);
+                res.append(value);
             }
         }
 
-        return formatRes(res);
+        return formatRes(res.toString());
     }
 
     public static void main(String[] args) {
